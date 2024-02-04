@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dilshan Assignment #1</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link href="/css/app.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="container mt-5 mb-5">
+
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+
+            <div class="container-fluid">
+                
+                <form th:action="@{/submitOrder}" th:object="${order}" method="post" modelAttribute="order">
+
+                    <h1 class="display-4 fw-medium">Smartphones Order Form</h1>
+
+                    <fieldset>
+
+                        <legend class="custom-tab mt-4">Full Name</legend>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" required />
+                                <label for="firstName">First Name</label>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" th:field="*{middleName}" id="middleName" />
+                                <label for="middleName">Middle Name</label>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" required />
+                                <label for="lastName">Last Name</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+
+                        <legend class="custom-tab mt-4">Email</legend>
+
+                        <div class="row mt-3">
+                            <div class="form-group">
+                                <input type="email" class="form-control" th:field="*{email}" id="email" required/>
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+
+                        <legend class="custom-tab mt-4">Contact Number</legend>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-2">
+                                <input type="text" class="form-control" th:field="*{areaCode}" id="areaCode" minlength="3" maxlength="3" required />
+                                <label for="areaCode">Area Code</label>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" minlength="9" maxlength="9" required />
+                                <label for="phoneNumber">Phone Number</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+
+                        <legend class="custom-tab mt-4">Billing Address</legend>
+
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" th:field="*{streetAddress}" id="streetAddress" required />
+                            <label for="streetAddress">Street Address</label>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" th:field="*{streetAddressTwo}" id="streetAddressTwo" />
+                            <label for="streetAddressTwo">Street Address Line 2</label>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control"th:field="*{city}" id="city" required />
+                                <label for="city">City</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control"th:field="*{stateProvince}" id="stateProvince" required />
+                                <label for="stateProvince">State/Province</label>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control"th:field="*{postalZipCode}" id="postalZipCode" minlength="6" maxlength="6" required />
+                                <label for="postalZipCode">Postal/Zip Code</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <select class="form-select" th:field="*{country}" id="country" required >
+                                    <option th:value="none" selected>Select Country</option>
+                                    <option th:value="Canada">Canada</option>
+                                    <option th:value="UnitedStates">United States</option>
+                                    <option th:value="UnitedKingdom">United Kingdom</option>
+                                    <option th:value="Australia">Australia</option>
+                                </select>
+                                <label for="country">Country</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+
+                        <legend class="custom-tab mt-4">Product Details</legend>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <label for="productCode">Product Code</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" th:field="*{productCode}" id="productCode"  minlength="10" maxlength="10" required />
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <label for="phoneBrand">Phone Brand</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <select class="form-select" th:field="*{phoneBrand}" id="phoneBrand" >
+                                    <option th:value="none" selected>Select Brand</option>
+							        <option th:value="Apple">Apple</option>
+							        <option th:value="Samsung">Samsung</option>
+							        <option th:value="Google">Google</option>
+							        <option th:value="Sony">Sony</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <label for="phoneModel">Phone Model</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+								
+                                <select class="form-select" th:field="*{phoneModel}" id="phoneModel">
+                                    <option th:value="none" selected>Select Brand</option>
+								</select>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                                <label for="quantity">Quantity</label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="number" class="form-control" th:field="*{quantity}" id="quantity" required />
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-primary mt-5">Submit Order</button>
+                    
+                    <button type="reset" class="btn btn-warning mt-5">Clear Form</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    <script th:inline="javascript">
+		
+		var modelsByBrand = {
+		    Apple: ["iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"],
+		    Samsung: ["Galaxy S24", "Galaxy S24 Plus", "Galaxy S24 Ultra 5G"],
+		    Google: ["Pixel 8", "Pixel 8 Pro", "Pixel 7a"],
+		    Sony: ["Xperia 1 V", "Xperia 5 V", "Xperia 10 V"],
+		};
+		
+		$(document).ready(function() {
+		
+		    function populateModelsDropdown(selectedBrand) {
+		
+		        var models = modelsByBrand[selectedBrand] || [];
+		        var modelDropdown = $("#phoneModel");
+		
+		        modelDropdown.empty();
+		
+		        if (models.length > 0) {
+		
+		            modelDropdown.prop("disabled", false);
+		
+		            models.forEach(function(model) {
+		            	modelDropdown.append('<option value="' + model + '">' + model + "</option>");
+		            });
+		
+		        } else {
+		
+		            modelDropdown.prop("disabled", true);
+		            modelDropdown.append('<option value="">Select Brand First</option>');
+		        }
+		    }
+		
+		    $("#phoneBrand").change(function() {
+		        var selectedBrand = $(this).val();
+		        populateModelsDropdown(selectedBrand);
+			});	
+		    
+		    $('#quantity').change(function() {
+		        var quantity = $(this).val();
+		        if (quantity < 0) {
+		            alert('Quantity should be more than 0!');
+		            $(this).val(0);
+		        }
+			});
+			
+		});
+
+	</script>
+
+</body>
+
+</html>

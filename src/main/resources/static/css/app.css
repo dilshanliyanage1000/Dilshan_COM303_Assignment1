@@ -1,0 +1,21 @@
+body {
+    background-color: #353535;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.custom-tab {
+    background-color: rgb(221, 221, 221);
+    padding: 5px;
+    padding-left: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#total_price {
+	color: #0b960b;
+	font-weight: 700;
+}

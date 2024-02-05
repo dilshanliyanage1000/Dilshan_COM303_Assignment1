@@ -1,3 +1,6 @@
+<!-- DILSHAN LIYANAGE 301-279-203 -->
+<!-- SUBMITTED IN 04-FEB-2024 -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -22,8 +25,14 @@
         <div class="p-5 mb-4 bg-body-tertiary rounded-3">
 
             <div class="container-fluid">
+				
+				<form th:action="@{/homePage}" method="get">
+					
+			        <button type="submit" class="btn btn-success mt-4 mb-4">Go to My Profile</button>
+			        
+			    </form>
                 
-                <form th:action="@{/submitOrder}" th:object="${order}" method="post" modelAttribute="order">
+                <form th:action="@{/submitOrder}" th:object="${order}" method="post" modelAttribute="order" >
 
                     <h1 class="display-4 fw-medium">Smartphones Order Form</h1>
 
@@ -74,7 +83,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" minlength="9" maxlength="9" required />
+                                <input type="text" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" minlength="7" maxlength="7" required />
                                 <label for="phoneNumber">Phone Number</label>
                             </div>
                         </div>
@@ -183,7 +192,7 @@
 
                     </fieldset>
 
-                    <button type="submit" class="btn btn-primary mt-5">Submit Order</button>
+                    <button type="submit" id="submit_btn" class="btn btn-primary mt-5">Submit Order</button>
                     
                     <button type="reset" class="btn btn-warning mt-5">Clear Form</button>
 
@@ -198,13 +207,17 @@
     <script th:inline="javascript">
 		
 		var modelsByBrand = {
-		    Apple: ["iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"],
+		    Apple: ["iPhone Xr", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"],
 		    Samsung: ["Galaxy S24", "Galaxy S24 Plus", "Galaxy S24 Ultra 5G"],
 		    Google: ["Pixel 8", "Pixel 8 Pro", "Pixel 7a"],
 		    Sony: ["Xperia 1 V", "Xperia 5 V", "Xperia 10 V"],
 		};
 		
 		$(document).ready(function() {
+			
+			document.getElementById('submit_btn').disabled = true;
+			
+			document.getElementById('quantity').value = 1;
 		
 		    function populateModelsDropdown(selectedBrand) {
 		
@@ -235,10 +248,36 @@
 		    
 		    $('#quantity').change(function() {
 		        var quantity = $(this).val();
-		        if (quantity < 0) {
+		        if (quantity < 1) {
 		            alert('Quantity should be more than 0!');
-		            $(this).val(0);
+		            $(this).val(1);
 		        }
+			});
+			
+			$('#areaCode, #phoneNumber').on('keyup', function() {
+			    var value = $(this).val();
+			    if (!/^\d+$/.test(value)) {
+			        alert('Numbers only!');
+			        $(this).val('');
+			    }
+			});
+
+			
+			function checkValidity() {
+				var country = document.getElementById('country').value;
+				var brand = document.getElementById('phoneBrand').value;
+				var model = document.getElementById('phoneModel').value;
+				
+				if(country !== "none" && brand !== "none" && model !== "none") {
+					document.getElementById('submit_btn').disabled = false;
+				} else {
+					document.getElementById('submit_btn').disabled = true;
+				}
+				
+			}
+			
+			$("#country, #phoneBrand, #phoneModel").change(function() {
+			    checkValidity();
 			});
 			
 		});
